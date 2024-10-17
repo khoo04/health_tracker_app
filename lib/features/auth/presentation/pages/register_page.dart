@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_tracker_app/core/common/widgets/loader.dart';
+import 'package:health_tracker_app/core/theme/app_pallete.dart';
 import 'package:health_tracker_app/core/utils/show_snackbar.dart';
 import 'package:health_tracker_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:health_tracker_app/features/auth/presentation/widgets/auth_button.dart';
@@ -33,7 +34,9 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: AppPallete.transparentColor,
+      ),
       body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: BlocConsumer<AuthBloc, AuthState>(

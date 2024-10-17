@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:health_tracker_app/core/common/entities/user.dart';
+import 'package:health_tracker_app/core/common/response/success.dart';
 import 'package:health_tracker_app/core/error/failure.dart';
 
 abstract interface class AuthRepository {
@@ -15,4 +16,6 @@ abstract interface class AuthRepository {
     required String password,
   });
   Future<Either<Failure, User>> currentUser();
+
+  Future<Either<Failure, Success?>> logoutUser();
 }

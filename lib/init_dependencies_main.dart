@@ -42,6 +42,14 @@ void _initAuth() {
         serviceLocator<AuthRepository>(),
       ),
     )
+    ..registerFactory(
+      () => CurrentUser(serviceLocator<AuthRepository>()),
+    )
+    ..registerFactory(
+      () => UserLogout(
+        serviceLocator<AuthRepository>(),
+      ),
+    )
     // ..registerFactory(
     //   () => CurrentUser(serviceLocator<AuthRepository>()),
     // )
@@ -52,6 +60,8 @@ void _initAuth() {
         userSignUp: serviceLocator<UserSignUp>(),
         userLogin: serviceLocator<UserLogin>(),
         appUserCubit: serviceLocator<AppUserCubit>(),
+        currentUser: serviceLocator<CurrentUser>(),
+        userLogout: serviceLocator<UserLogout>(),
       ),
     );
 }

@@ -1,4 +1,6 @@
+import 'package:health_tracker_app/core/common/response/success.dart';
 import 'package:health_tracker_app/core/error/exceptions.dart';
+import 'package:health_tracker_app/core/utils/logger.dart';
 import 'package:health_tracker_app/features/auth/data/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -17,6 +19,8 @@ abstract interface class AuthRemoteDataSource {
     required String password,
   });
   Future<UserModel?> getCurrentUserData();
+
+  Future<Success?> logoutUser();
 }
 
 class AuthRemoteDataSourceImp implements AuthRemoteDataSource {
@@ -83,12 +87,25 @@ class AuthRemoteDataSourceImp implements AuthRemoteDataSource {
         final userData = await supabaseClient
             .from('users')
             .select()
-            .eq('id', currentUserSession!.user.id);
+            .eq('user_id', currentUserSession!.user.id);
+        eLog(userData);
         return UserModel.fromJson(userData.first).copyWith(
           email: currentUserSession!.user.email,
         );
       }
       return null;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<Success?> logoutUser() async {
+    try {
+      await supabaseClient.auth.signOut();
+      return Success('User logout successfully');
+    } on AuthException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
