@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_tracker_app/core/common/widgets/loader.dart';
+import 'package:health_tracker_app/core/theme/app_pallete.dart';
+import 'package:health_tracker_app/core/utils/logger.dart';
 import 'package:health_tracker_app/core/utils/show_snackbar.dart';
 import 'package:health_tracker_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:health_tracker_app/features/auth/presentation/pages/register_page.dart';
 import 'package:health_tracker_app/features/auth/presentation/widgets/auth_button.dart';
 import 'package:health_tracker_app/features/auth/presentation/widgets/auth_input_field.dart';
+import 'package:health_tracker_app/features/auth/presentation/widgets/auth_password_field.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login';
@@ -50,31 +53,56 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Sign In.",
-                      style:
-                          TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    AuthInputField(
-                      hintText: "Email",
-                      controller: emailController,
-                    ),
                     const SizedBox(
                       height: 15,
                     ),
-                    AuthInputField(
-                      hintText: "Password",
-                      controller: passwordController,
-                      isObscureText: true,
+                    const Text(
+                      "Welcome",
+                      style:
+                          TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                    ),
+                    Image.asset(
+                      "assets/images/healthcare_logo.png",
+                      width: MediaQuery.sizeOf(context).width * 0.5,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
+                    AuthInputField(
+                      hintText: "Email",
+                      prefixIcon: const Icon(Icons.email),
+                      controller: emailController,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    AuthPasswordField(
+                      controller: passwordController,
+                      hintText: "Password",
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          child: const Text(
+                            "Forgot your password?",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppPallete.primaryColor,
+                            ),
+                          ),
+                          onTap: () => eLog("TODO: Not implement yet"),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     AuthButton(
-                      buttonText: "Sign In",
+                      buttonText: "Log In",
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           context.read<AuthBloc>().add(
@@ -105,6 +133,8 @@ class _LoginPageState extends State<LoginPage> {
                                     .titleMedium
                                     ?.copyWith(
                                       fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline,
+                                      color: AppPallete.primaryColor,
                                     ),
                               )
                             ]),

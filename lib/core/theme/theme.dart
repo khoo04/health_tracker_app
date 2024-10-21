@@ -13,12 +13,12 @@ class AppTheme {
       color: WidgetStatePropertyAll(AppPallete.backgroundColor),
       side: BorderSide.none,
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      enabledBorder: _border(),
-      border: _border(),
-      focusedBorder: _border(AppPallete.greyColor),
-      contentPadding: const EdgeInsets.all(27),
-      errorBorder: _border(AppPallete.errorColor),
-    ),
+    // inputDecorationTheme: InputDecorationTheme(
+    //   enabledBorder: _border(),
+    //   border: _border(),
+    //   focusedBorder: _border(AppPallete.greyColor),
+    //   contentPadding: const EdgeInsets.all(27),
+    //   errorBorder: _border(AppPallete.errorColor),
+    // ),
   );
 }

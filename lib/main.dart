@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_tracker_app/core/common/cubits/app_user/app_user_cubit.dart';
+import 'package:health_tracker_app/core/common/pages/user_agreement_policy.dart';
 import 'package:health_tracker_app/core/theme/theme.dart';
 import 'package:health_tracker_app/core/utils/logger.dart';
 import 'package:health_tracker_app/dashboard.dart';
@@ -61,6 +62,7 @@ class _MyAppState extends State<MyApp> {
             ),
         LoginPage.routeName: (context) => const LoginPage(),
         RegisterPage.routeName: (context) => const RegisterPage(),
+        UserAgreementPolicy.routeName: (context) => const UserAgreementPolicy(),
       },
     );
   }
