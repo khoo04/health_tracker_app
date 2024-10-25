@@ -74,6 +74,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: event.password,
       ),
     );
+    eLog(res);
 
     /// Left = Failure, Right = Success
     res.fold((failure) => emit(AuthFailure(failure.message)),
@@ -84,18 +85,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _onAuthLogout(AuthLogout event, Emitter<AuthState> emit) async {
     final res = await _userLogout(NoParams());
 
-    res.fold(
-      (failure) => emit(AuthFailure(failure.message)),
-      (success){
-        emit(AuthInitial());
-        _appUserCubit.updateUser(null);
-      }
-    );
+    res.fold((failure) => emit(AuthFailure(failure.message)), (success) {
+      emit(AuthInitial());
+      _appUserCubit.updateUser(null);
+    });
   }
 
   //Function to update App User Cubit
   void _emitAuthSuccess(User user, Emitter<AuthState> emit) {
     _appUserCubit.updateUser(user);
     emit(AuthSuccess(user));
+    vLog(user);
   }
 }

@@ -31,11 +31,13 @@ class AuthRepositoryImpl implements AuthRepository {
             firstName: '',
             lastName: ''));
       }
+
       final user = await _authRemoteDataSource.getCurrentUserData();
 
       if (user == null) {
         return left(Failure("User not logged in"));
       }
+
       return right(user);
     } on ServerException catch (e) {
       return left(Failure(e.message));

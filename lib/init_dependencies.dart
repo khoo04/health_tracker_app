@@ -10,6 +10,11 @@ import 'package:health_tracker_app/features/auth/domain/usecases/user_login.dart
 import 'package:health_tracker_app/features/auth/domain/usecases/user_logout.dart';
 import 'package:health_tracker_app/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:health_tracker_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:health_tracker_app/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:health_tracker_app/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:health_tracker_app/features/profile/domain/repositories/profile_repository.dart';
+import 'package:health_tracker_app/features/profile/domain/usecases/update_basic_details.dart';
+import 'package:health_tracker_app/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

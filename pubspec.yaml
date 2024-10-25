@@ -41,6 +41,11 @@ dependencies:
   internet_connection_checker_plus: ^2.5.2
   logger: ^2.4.0
   get_it: ^8.0.0
+  numberpicker: ^2.1.2
+  toggle_switch: ^2.3.0
+  fluttertoast: ^8.2.8
+  loader_overlay: ^4.0.3
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:

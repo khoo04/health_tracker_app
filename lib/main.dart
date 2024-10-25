@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_tracker_app/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:health_tracker_app/core/common/pages/user_agreement_policy.dart';
 import 'package:health_tracker_app/core/theme/theme.dart';
-import 'package:health_tracker_app/core/utils/logger.dart';
-import 'package:health_tracker_app/dashboard.dart';
+import 'package:health_tracker_app/app_wrapper.dart';
 import 'package:health_tracker_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:health_tracker_app/features/auth/presentation/pages/login_page.dart';
 import 'package:health_tracker_app/features/auth/presentation/pages/register_page.dart';
+import 'package:health_tracker_app/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:health_tracker_app/init_dependencies.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,9 @@ void main() async {
       ),
       BlocProvider(
         create: (_) => serviceLocator<AuthBloc>(),
+      ),
+      BlocProvider(
+        create: (_) => serviceLocator<ProfileBloc>(),
       ),
     ],
     child: const MyApp(),
@@ -42,28 +46,20 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Health Tracker',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightThemeMode,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => BlocSelector<AppUserCubit, AppUserState, bool>(
-              selector: (isLoggedIn) {
-                vLog(isLoggedIn);
-                return isLoggedIn is AppUserLoggedIn;
-              },
-              builder: (context, isLoggedIn) {
-                if (isLoggedIn) {
-                  return const Dashboard();
-                }
-                return const LoginPage();
-              },
-            ),
-        LoginPage.routeName: (context) => const LoginPage(),
-        RegisterPage.routeName: (context) => const RegisterPage(),
-        UserAgreementPolicy.routeName: (context) => const UserAgreementPolicy(),
-      },
+    return GlobalLoaderOverlay(
+      child: MaterialApp(
+        title: 'My Health Tracker',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightThemeMode,
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const AppWrapper(),
+          LoginPage.routeName: (context) => const LoginPage(),
+          RegisterPage.routeName: (context) => const RegisterPage(),
+          UserAgreementPolicy.routeName: (context) =>
+              const UserAgreementPolicy(),
+        },
+      ),
     );
   }
 }
