@@ -1,67 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_tracker_app/core/common/cubits/app_user/app_user_cubit.dart';
-import 'package:health_tracker_app/core/theme/theme.dart';
-import 'package:health_tracker_app/core/utils/logger.dart';
-import 'package:health_tracker_app/dashboard.dart';
-import 'package:health_tracker_app/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:health_tracker_app/features/auth/presentation/pages/login_page.dart';
-import 'package:health_tracker_app/features/auth/presentation/pages/register_page.dart';
-import 'package:health_tracker_app/init_dependencies.dart';
+import 'package:health_tracker_app/bloc/article/bloc/artc_bloc.dart';
+import 'package:health_tracker_app/bloc/homepage/home_bloc.dart';
+import 'package:health_tracker_app/bottom.dart';
+import 'package:health_tracker_app/model/article_model.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initDependencies();
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(
-        create: (_) => serviceLocator<AppUserCubit>(),
-      ),
-      BlocProvider(
-        create: (_) => serviceLocator<AuthBloc>(),
-      ),
-    ],
-    child: const MyApp(),
-  ));
+  await Supabase.initialize(
+      url: "https://oezjjnvxfkhirqljetig.supabase.co",
+      anonKey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9lempqbnZ4ZmtoaXJxbGpldGlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjkwOTAzOTksImV4cCI6MjA0NDY2NjM5OX0.Lh69F4FPg0i0Jd3yf0wcznN2lCtG5pxYvOKqsx3xMjc");
+  runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<AuthBloc>().add(AuthIsUserLoggedIn());
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Health Tracker',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightThemeMode,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => BlocSelector<AppUserCubit, AppUserState, bool>(
-              selector: (isLoggedIn) {
-                vLog(isLoggedIn);
-                return isLoggedIn is AppUserLoggedIn;
-              },
-              builder: (context, isLoggedIn) {
-                if (isLoggedIn) {
-                  return const Dashboard();
-                }
-                return const LoginPage();
-              },
-            ),
-        LoginPage.routeName: (context) => const LoginPage(),
-        RegisterPage.routeName: (context) => const RegisterPage(),
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(create: (context) => ArtcBloc())
+      ],
+      child: const MaterialApp(
+          debugShowCheckedModeBanner: false, home: FramePage()),
     );
   }
 }
