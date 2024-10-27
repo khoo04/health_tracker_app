@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_tracker_app/main.dart';
 import 'package:health_tracker_app/pages/article/article_home.dart';
 import 'package:health_tracker_app/pages/homepage/level.dart';
 
@@ -34,8 +35,7 @@ class _FramePageState extends State<FramePage> {
           child: Icon(
             icon,
             size: 35,
-            color:
-                index == currIndex ? Color.fromARGB(255, 20, 150, 126) : null,
+            color: index == currIndex ? ThemeProvider.mainColor : null,
           ),
         ),
       ),
@@ -49,11 +49,18 @@ class _FramePageState extends State<FramePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        shadowColor: Colors.white,
+        scrolledUnderElevation: 0.0,
         toolbarHeight: 70,
         automaticallyImplyLeading: false,
         title: Row(children: [
-          const CircleAvatar(radius: 30, child: Icon(Icons.favorite, size: 35)),
+          const CircleAvatar(
+              backgroundColor: ThemeProvider.mainColor,
+              radius: 30,
+              child: Icon(
+                Icons.favorite,
+                size: 35,
+                color: ThemeProvider.secondColor,
+              )),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -73,7 +80,7 @@ class _FramePageState extends State<FramePage> {
                       lineHeight: 15,
                       width: 150,
                       percent: currentPercent,
-                      progressColor: Color.fromARGB(255, 20, 150, 126),
+                      progressColor: ThemeProvider.mainColor,
                     ),
                     const SizedBox(height: 5),
                     const Divider(thickness: 4, endIndent: 50)

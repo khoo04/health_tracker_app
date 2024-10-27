@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_tracker_app/bloc/article/bloc/artc_bloc.dart';
-import 'package:health_tracker_app/main.dart';
 import 'package:health_tracker_app/model/article_model.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ArticlePage extends StatefulWidget {
   const ArticlePage({super.key});

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health_tracker_app/bloc/homepage/home_bloc.dart';
+import 'package:health_tracker_app/main.dart';
 import 'package:health_tracker_app/pages/homepage/routine.dart';
 
 class Bridge extends StatelessWidget {
@@ -27,11 +28,12 @@ class LevelPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScrollController _scrollController = ScrollController();
-    int currentlevel = 3;
-    double mainLiter = 3000 / 7;
-    double mainStep = 1000 / 7;
-    double mainCalorie = 2300 / 7;
+    ScrollController scrollController = ScrollController();
+
+    int currentlevel = 7;
+    double mainLiter = 3 / 7;
+    double mainStep = 2500 / 7;
+    double mainCalorie = 3000 / 7;
 
     Widget levelContainer({required int index}) {
       return Row(children: [
@@ -42,14 +44,14 @@ class LevelPage extends StatelessWidget {
               String tempLiter = (mainLiter * index).toStringAsFixed(1);
 
               double levelLiter = double.parse(tempLiter);
-              int levelStep = mainStep.toInt();
-              int levelCalorie = mainCalorie.toInt();
+              int levelStep = (mainStep * index).toInt();
+              int levelCalorie = (mainCalorie * index).toInt();
 
               context.read<HomeBloc>().add(LevelPressed(
                   Liter: levelLiter,
                   Step: levelStep,
                   Calories: levelCalorie,
-                  pageIndex: 1));
+                  ));
             }
           },
           child: Container(
@@ -57,9 +59,10 @@ class LevelPage extends StatelessWidget {
             height: 110,
             width: 110,
             decoration: BoxDecoration(
+                boxShadow: [BoxShadow(offset: Offset(10, 10))],
                 color: index > currentlevel
                     ? Colors.grey
-                    : Color.fromARGB(255, 20, 150, 126),
+                    : ThemeProvider.mainColor,
                 borderRadius: BorderRadius.circular(20)),
             child: Center(
               child: Icon(
@@ -69,7 +72,7 @@ class LevelPage extends StatelessWidget {
                 size: 80,
                 color: index > currentlevel
                     ? Colors.black
-                    : Color.fromARGB(255, 226, 252, 214),
+                    : ThemeProvider.secondColor,
               ),
             ),
           ),
@@ -78,12 +81,12 @@ class LevelPage extends StatelessWidget {
     }
 
     return Scrollbar(
-      radius: Radius.circular(30),
+      radius: const Radius.circular(30),
       thickness: 10,
       thumbVisibility: true,
-      controller: _scrollController,
+      controller: scrollController,
       child: SingleChildScrollView(
-        controller: _scrollController,
+        controller: scrollController,
         child: Column(children: [
           const Padding(
             padding: EdgeInsets.all(8.0),
