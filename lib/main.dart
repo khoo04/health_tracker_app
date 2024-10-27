@@ -4,10 +4,13 @@ import 'package:health_tracker_app/core/common/cubits/app_user/app_user_cubit.da
 import 'package:health_tracker_app/core/common/pages/user_agreement_policy.dart';
 import 'package:health_tracker_app/core/theme/theme.dart';
 import 'package:health_tracker_app/app_wrapper.dart';
+import 'package:health_tracker_app/features/articles/presentation/bloc/article_bloc.dart';
 import 'package:health_tracker_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:health_tracker_app/features/auth/presentation/pages/login_page.dart';
 import 'package:health_tracker_app/features/auth/presentation/pages/register_page.dart';
+import 'package:health_tracker_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:health_tracker_app/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:health_tracker_app/features/profile/presentation/pages/profile_page.dart';
 import 'package:health_tracker_app/init_dependencies.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -24,6 +27,12 @@ void main() async {
       ),
       BlocProvider(
         create: (_) => serviceLocator<ProfileBloc>(),
+      ),
+      BlocProvider(
+        create: (_) => serviceLocator<ArticleBloc>(),
+      ),
+      BlocProvider(
+        create: (_) => serviceLocator<HomeBloc>(),
       ),
     ],
     child: const MyApp(),
@@ -58,6 +67,7 @@ class _MyAppState extends State<MyApp> {
           RegisterPage.routeName: (context) => const RegisterPage(),
           UserAgreementPolicy.routeName: (context) =>
               const UserAgreementPolicy(),
+          ProfilePage.routeName: (context) => const ProfilePage(),
         },
       ),
     );

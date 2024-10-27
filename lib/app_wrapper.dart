@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_tracker_app/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:health_tracker_app/core/common/entities/user.dart';
-import 'package:health_tracker_app/core/common/pages/dashboard.dart';
+import 'package:health_tracker_app/core/common/pages/app_frame.dart';
 import 'package:health_tracker_app/core/utils/logger.dart';
 import 'package:health_tracker_app/features/auth/presentation/pages/login_page.dart';
 import 'package:health_tracker_app/features/profile/presentation/pages/bmi_details_page.dart';
@@ -37,7 +37,7 @@ class _AppWrapperState extends State<AppWrapper> {
           return const BmiDetailsPage();
         }
         //TODO: Should return to Dashboard
-        return const ProfilePage();
+        return const AppFrame();
       } else {
         // If no user is logged in, show the login screen
         return const LoginPage();

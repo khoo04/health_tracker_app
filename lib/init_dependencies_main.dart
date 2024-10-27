@@ -5,6 +5,8 @@ final serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
   _initAuth();
   _initProfile();
+  _initArticle();
+  _initHome();
   final supabase = await Supabase.initialize(
     url: AppSecrets.supabaseUrl,
     anonKey: AppSecrets.supaseAnonKey,
@@ -91,4 +93,30 @@ void _initProfile() {
         appUserCubit: serviceLocator<AppUserCubit>(),
       ),
     );
+}
+
+void _initArticle() {
+  serviceLocator
+    ..registerFactory<ArticleRemoteDataSource>(
+        () => ArticleRemoteDataSourceImp(serviceLocator<SupabaseClient>()))
+    ..registerFactory<ArticleRepository>(
+      () => ArticleRepositoryImpl(
+        serviceLocator<ArticleRemoteDataSource>(),
+        serviceLocator<ConnectionChecker>(),
+      ),
+    )
+    ..registerFactory(
+      () => FetchArticle(
+        serviceLocator<ArticleRepository>(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => ArticleBloc(
+        fetchArticle: serviceLocator<FetchArticle>(),
+      ),
+    );
+}
+
+void _initHome() {
+  serviceLocator.registerLazySingleton(() => HomeBloc());
 }
