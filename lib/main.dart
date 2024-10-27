@@ -60,7 +60,7 @@ class ThemeProvider with ChangeNotifier {
     textTheme: GoogleFonts.montserratTextTheme(),
     useMaterial3: false,
     brightness: Brightness.light,
-    scaffoldBackgroundColor: Color.fromARGB(255, 248, 249, 250),
+    scaffoldBackgroundColor: Color.fromARGB(255, 228, 233, 242),
     appBarTheme: const AppBarTheme(
         color: Colors.transparent,
         shadowColor: Colors.transparent,

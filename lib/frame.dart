@@ -89,26 +89,31 @@ class _FramePageState extends State<FramePage> {
           ),
         ]),
       ),
-      body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        Expanded(
-          child: IndexedStack(
-            index: currIndex,
-            children: page,
+      body: Stack(
+        children: [
+          Expanded(
+            child: IndexedStack(
+              index: currIndex,
+              children: page,
+            ),
           ),
-        ),
-        Container(
-          margin: EdgeInsets.only(bottom: 10),
-          height: 80,
-          width: 330,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
-              color: Color.fromARGB(255, 222, 225, 230)),
-          child: Row(children: [
-            bottomNaviIcon(icon: Icons.home, index: 0),
-            bottomNaviIcon(icon: Icons.article, index: 1)
-          ]),
-        )
-      ]),
+          Positioned(
+            bottom: 0,
+            left: 40,
+            child: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              height: 80,
+              width: 330,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40), color: Colors.white),
+              child: Row(children: [
+                bottomNaviIcon(icon: Icons.home, index: 0),
+                bottomNaviIcon(icon: Icons.article, index: 1)
+              ]),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

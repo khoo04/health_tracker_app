@@ -48,9 +48,9 @@ class LevelPage extends StatelessWidget {
               int levelCalorie = (mainCalorie * index).toInt();
 
               context.read<HomeBloc>().add(LevelPressed(
-                  Liter: levelLiter,
-                  Step: levelStep,
-                  Calories: levelCalorie,
+                    Liter: levelLiter,
+                    Step: levelStep,
+                    Calories: levelCalorie,
                   ));
             }
           },
@@ -86,6 +86,7 @@ class LevelPage extends StatelessWidget {
       thumbVisibility: true,
       controller: scrollController,
       child: SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: 100),
         controller: scrollController,
         child: Column(children: [
           const Padding(
