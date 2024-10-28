@@ -212,7 +212,7 @@ class _RoutinePageState extends State<RoutinePage> {
                     percent: percentCalorie > 1 ? 1 : percentCalorie),
               ),
               const SizedBox(
-                height: 20,
+                height: 120,
               ),
             ],
           ),
