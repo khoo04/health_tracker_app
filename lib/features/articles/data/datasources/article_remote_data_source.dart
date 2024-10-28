@@ -1,8 +1,6 @@
-import 'package:health_tracker_app/core/enums/gender.dart';
 import 'package:health_tracker_app/core/error/exceptions.dart';
 import 'package:health_tracker_app/core/utils/logger.dart';
 import 'package:health_tracker_app/features/articles/data/models/article_model.dart';
-import 'package:health_tracker_app/features/auth/data/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class ArticleRemoteDataSource {

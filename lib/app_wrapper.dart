@@ -6,7 +6,6 @@ import 'package:health_tracker_app/core/common/pages/app_frame.dart';
 import 'package:health_tracker_app/core/utils/logger.dart';
 import 'package:health_tracker_app/features/auth/presentation/pages/login_page.dart';
 import 'package:health_tracker_app/features/profile/presentation/pages/bmi_details_page.dart';
-import 'package:health_tracker_app/features/profile/presentation/pages/profile_page.dart';
 
 class AppWrapper extends StatefulWidget {
   const AppWrapper({super.key});

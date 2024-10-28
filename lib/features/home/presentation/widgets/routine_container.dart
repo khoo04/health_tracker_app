@@ -13,9 +13,9 @@ class RoutineContainer extends StatelessWidget {
   final String current;
   final String remain;
   final double percent;
-  void Function()? onTap;
+  final void Function()? onTap;
 
-  RoutineContainer(
+  const RoutineContainer(
       {super.key,
       required this.left,
       required this.right,

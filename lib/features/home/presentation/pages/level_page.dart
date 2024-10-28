@@ -24,34 +24,47 @@ class LevelPage extends StatelessWidget {
       child: SingleChildScrollView(
         padding: const EdgeInsets.only(bottom: 100),
         controller: scrollController,
-        child: Column(children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: FaIcon(
-              FontAwesomeIcons.trophy,
-              color: Color.fromARGB(255, 239, 177, 52),
-              size: 80,
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: FaIcon(
+                FontAwesomeIcons.trophy,
+                color: Color.fromARGB(255, 239, 177, 52),
+                size: 80,
+              ),
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: Colors.black),
-            child: const Icon(
-              Icons.arrow_upward_rounded,
-              color: Colors.white,
-              size: 40,
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20), color: Colors.black),
+              child: const Icon(
+                Icons.arrow_upward_rounded,
+                color: Colors.white,
+                size: 40,
+              ),
             ),
-          ),
-          for (int i = 7; i >= 1; i--)
-            levelContainer(
-              context,
-              index: i,
-              currentlevel: currentlevel,
-              mainLiter: mainLiter,
-              mainStep: mainStep,
-              mainCalorie: mainCalorie,
-            )
-        ]),
+            for (int i = 7; i >= 1; i--)
+              Padding(
+                padding: EdgeInsets.only(
+                  left: i % 2 == 1 ? 150.0 : 0.0,
+                  right: i % 2 == 0 ? 150.0 : 0.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    levelContainer(
+                      context,
+                      index: i,
+                      currentlevel: currentlevel,
+                      mainLiter: mainLiter,
+                      mainStep: mainStep,
+                      mainCalorie: mainCalorie,
+                    ),
+                  ],
+                ),
+              )
+          ],
+        ),
       ),
     );
   }
@@ -64,46 +77,41 @@ class LevelPage extends StatelessWidget {
     required double mainStep,
     required double mainCalorie,
   }) {
-    return Row(children: [
-      SizedBox(width: index % 2 == 0 ? 250 : 50),
-      GestureDetector(
-        onTap: () {
-          if (index == currentlevel) {
-            String tempLiter = (mainLiter * index).toStringAsFixed(1);
+    return GestureDetector(
+      onTap: () {
+        if (index == currentlevel) {
+          String tempLiter = (mainLiter * index).toStringAsFixed(1);
 
-            double levelLiter = double.parse(tempLiter);
-            int levelStep = (mainStep * index).toInt();
-            int levelCalorie = (mainCalorie * index).toInt();
+          double levelLiter = double.parse(tempLiter);
+          int levelStep = (mainStep * index).toInt();
+          int levelCalorie = (mainCalorie * index).toInt();
 
-            context.read<HomeBloc>().add(LevelPressed(
-                  liter: levelLiter,
-                  step: levelStep,
-                  calories: levelCalorie,
-                ));
-          }
-        },
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          height: 110,
-          width: 110,
-          decoration: BoxDecoration(
-              boxShadow: const [BoxShadow(offset: Offset(10, 10))],
-              color:
-                  index > currentlevel ? Colors.grey : AppPallete.primaryColor,
-              borderRadius: BorderRadius.circular(20)),
-          child: Center(
-            child: Icon(
-              index > currentlevel
-                  ? Icons.lock
-                  : (index == currentlevel ? Icons.favorite : Icons.check),
-              size: 80,
-              color: index > currentlevel
-                  ? Colors.black
-                  : AppPallete.secondaryColor,
-            ),
+          context.read<HomeBloc>().add(LevelPressed(
+                liter: levelLiter,
+                step: levelStep,
+                calories: levelCalorie,
+              ));
+        }
+      },
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        height: 110,
+        width: 110,
+        decoration: BoxDecoration(
+            boxShadow: const [BoxShadow(offset: Offset(10, 10))],
+            color: index > currentlevel ? Colors.grey : AppPallete.primaryColor,
+            borderRadius: BorderRadius.circular(20)),
+        child: Center(
+          child: Icon(
+            index > currentlevel
+                ? Icons.lock
+                : (index == currentlevel ? Icons.favorite : Icons.check),
+            size: 80,
+            color:
+                index > currentlevel ? Colors.black : AppPallete.secondaryColor,
           ),
         ),
-      )
-    ]);
+      ),
+    );
   }
 }
