@@ -62,8 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                           TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                     ),
                     Image.asset(
-                      "assets/images/healthcare_logo.png",
-                      width: MediaQuery.sizeOf(context).width * 0.5,
+                      "assets/images/logo.png",
+                      width: MediaQuery.sizeOf(context).width * 0.65,
                     ),
                     const SizedBox(
                       height: 20,

@@ -46,7 +46,8 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("User Details"),
+        title: const Text("Calculate Your BMI",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -67,6 +68,7 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
                   height: 20,
                 ),
                 TextFormField(
+                  textAlign: TextAlign.center,
                   controller: heightController,
                   onTap: () async {
                     //SHOW DIALOG
@@ -86,9 +88,12 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
                   },
                   readOnly: true,
                   decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppPallete.primaryColor)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
+                    labelStyle: TextStyle(color: AppPallete.primaryColor),
                     labelText: "Height (cm)",
                     hintText: "Please choose your height",
                     floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -98,6 +103,7 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
                   height: 30,
                 ),
                 TextFormField(
+                  textAlign: TextAlign.center,
                   controller: weightController,
                   onTap: () async {
                     //SHOW DIALOG
@@ -117,9 +123,12 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
                   },
                   readOnly: true,
                   decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppPallete.primaryColor)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
+                    labelStyle: TextStyle(color: AppPallete.primaryColor),
                     labelText: "Weight (kg)",
                     hintText: "Please choose your weight",
                     floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -129,6 +138,7 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
                   height: 30,
                 ),
                 TextFormField(
+                  textAlign: TextAlign.center,
                   controller: ageController,
                   onTap: () async {
                     //SHOW DIALOG
@@ -148,25 +158,14 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
                   },
                   readOnly: true,
                   decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppPallete.primaryColor)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
+                    labelStyle: TextStyle(color: AppPallete.primaryColor),
                     labelText: "Age",
                     hintText: "Please choose your age",
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  controller: bmiController,
-                  readOnly: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    labelText: "BMI",
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                   ),
                 ),
@@ -199,7 +198,16 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
                   },
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 10,
+                ),
+                Divider(thickness: 3, color: Colors.black),
+                Text("Your BMI is", style: TextStyle(fontSize: 40)),
+                Text(bmiController.text,
+                    style:
+                        TextStyle(fontSize: 50, fontWeight: FontWeight.bold)),
+                Image.asset(
+                  "assets/images/bmi_bar.png",
+                  width: MediaQuery.sizeOf(context).width * 0.90,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -243,6 +251,7 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
+                SizedBox(height: 20)
               ],
             ),
           ),

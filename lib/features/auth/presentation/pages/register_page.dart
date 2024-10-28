@@ -22,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   bool isRead = false;
@@ -69,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 if (state is AuthFailure) {
                   showSnackBar(context, state.message);
                 } else if (state is AuthSuccess) {
-                  Navigator.of(context).pop();
+                  Navigator.pushReplacementNamed(context, '/');
                 }
               },
               builder: (context, state) {
@@ -140,7 +141,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               AuthPasswordField(
                                 hintText: "Confirm Password",
-                                controller: passwordController,
+                                controller: confirmPasswordController,
                               ),
                               const SizedBox(
                                 height: 10,
@@ -205,29 +206,36 @@ class _RegisterPageState extends State<RegisterPage> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              GestureDetector(
-                                onTap: () => Navigator.pop(context),
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: "Already have an account? ",
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                    children: [
-                                      TextSpan(
-                                        text: "Sign In",
+                              Row(
+                                children: [
+                                  SizedBox(width: 40),
+                                  GestureDetector(
+                                    onTap: () => Navigator.pop(context),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: "Already have an account? ",
                                         style: Theme.of(context)
                                             .textTheme
-                                            .titleMedium
-                                            ?.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              color: AppPallete.primaryColor,
-                                              decoration:
-                                                  TextDecoration.underline,
-                                            ),
+                                            .titleMedium,
+                                        children: [
+                                          TextSpan(
+                                            text: "Sign In",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  color:
+                                                      AppPallete.primaryColor,
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
                               //Reserved Space to Scroll
                               const SizedBox(
