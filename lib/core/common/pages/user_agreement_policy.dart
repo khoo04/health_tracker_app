@@ -59,7 +59,7 @@ class UserAgreementPolicy extends StatelessWidget {
                   child: const Text.rich(
                     TextSpan(
                       text:
-                          "Welcome to [App Name]! By downloading, accessing, or using our mobile application, you agree to be bound by this User Agreement. Please read the following terms carefully.\n",
+                          "Welcome to HealthQuest! By downloading, accessing, or using our mobile application, you agree to be bound by this User Agreement. Please read the following terms carefully.\n",
                       style: TextStyle(fontSize: 16, color: Colors.black),
                       children: [
                         TextSpan(
@@ -68,7 +68,7 @@ class UserAgreementPolicy extends StatelessWidget {
                         ),
                         TextSpan(
                             text:
-                                "By using the [App Name] app, you agree to comply with and be bound by these terms and conditions. If you do not agree to these terms, you should not use the app.\n"),
+                                "By using the HealthQuest app, you agree to comply with and be bound by these terms and conditions. If you do not agree to these terms, you should not use the app.\n"),
                         TextSpan(
                           text: "\n2. Use of the App\n",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -78,7 +78,7 @@ You must be at least [age] years old to use [App Name].
                                     
 You are responsible for any activity that occurs under your account. 
 
-You agree not to use [App Name] for any unlawful or prohibited activity."""),
+You agree not to use HealthQuest for any unlawful or prohibited activity."""),
                       ],
                     ),
                   ),
@@ -104,7 +104,7 @@ You agree not to use [App Name] for any unlawful or prohibited activity."""),
                   child: const Text.rich(
                     TextSpan(
                       text:
-                          "At [App Name], we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data.\n",
+                          "At HealthQuest, we value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data.\n",
                       style: TextStyle(fontSize: 16, color: Colors.black),
                       children: [
                         TextSpan(
