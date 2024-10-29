@@ -32,6 +32,7 @@ class RoutineContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     Color themeColor = Colors.white;
 
     return GestureDetector(

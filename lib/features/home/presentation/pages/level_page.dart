@@ -11,7 +11,7 @@ class LevelPage extends StatelessWidget {
   Widget build(BuildContext context) {
     ScrollController scrollController = ScrollController();
 
-    int currentlevel = 7;
+    int currentlevel = 3;
     double mainLiter = 3 / 7;
     double mainStep = 2500 / 7;
     double mainCalorie = 3000 / 7;

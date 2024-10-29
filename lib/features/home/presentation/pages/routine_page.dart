@@ -22,7 +22,7 @@ class RoutinePage extends StatefulWidget {
 class _RoutinePageState extends State<RoutinePage> {
   double currentLiter = 2.2;
   int currentStep = 500;
-  int currentCalorie = 2300;
+  int currentCalorie = 1500;
 
   double percentLiter = 0, percentStep = 0, percentCalorie = 0;
 
@@ -40,11 +40,20 @@ class _RoutinePageState extends State<RoutinePage> {
     calcuPercent();
   }
 
-  Future<void> addDialogBox(
+  Future<double?> addDialogBox(
       BuildContext context, Color color, IconData icon, String type) {
     return showDialog(
         context: context,
         builder: (context) {
+          TextEditingController userInput = TextEditingController();
+
+          void addValue(int value) {
+            if (userInput.text.isEmpty) userInput.text = "0";
+            double temp = double.parse(userInput.text);
+            temp += value;
+            userInput.text = temp.toStringAsFixed(1);
+          }
+
           return Dialog(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -60,15 +69,16 @@ class _RoutinePageState extends State<RoutinePage> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const SizedBox(
+                            SizedBox(
                               width: 200,
                               height: 50,
                               child: Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: TextField(
+                                  controller: userInput,
                                   textAlign: TextAlign.center,
                                   keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       contentPadding:
                                           EdgeInsets.only(bottom: 10),
                                       hintText: "200",
@@ -94,16 +104,18 @@ class _RoutinePageState extends State<RoutinePage> {
                             SizedBox(
                               width: 130,
                               child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () => addValue(500),
                                   child: const Text("+500",
-                                      style: TextStyle(fontSize: 20))),
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.black))),
                             ),
                             SizedBox(
                               width: 130,
                               child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () => addValue(1000),
                                   child: const Text("+1000",
-                                      style: TextStyle(fontSize: 20))),
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.black))),
                             )
                           ]),
                       Padding(
@@ -111,8 +123,10 @@ class _RoutinePageState extends State<RoutinePage> {
                         child: SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                                onPressed: () {},
-                                child: const Icon(Icons.add))),
+                                onPressed: () => Navigator.pop(
+                                    context, double.parse(userInput.text)),
+                                child: const Icon(Icons.add,
+                                    color: Colors.black))),
                       )
                     ]),
               ),
@@ -153,6 +167,17 @@ class _RoutinePageState extends State<RoutinePage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: RoutineContainer(
+                    onTap: () async {
+                      final temp = await addDialogBox(
+                          context,
+                          const Color.fromARGB(255, 52, 89, 191),
+                          Icons.water_drop,
+                          "ml");
+                      if (temp == null) return;
+                      temp as double;
+                      currentLiter += (temp / 1000);
+                      calcuPercent();
+                    },
                     left: 25,
                     right: 20,
                     color1: const Color.fromARGB(255, 153, 199, 242),
@@ -172,13 +197,6 @@ class _RoutinePageState extends State<RoutinePage> {
               Align(
                 alignment: Alignment.centerRight,
                 child: RoutineContainer(
-                    onTap: () {
-                      addDialogBox(
-                          context,
-                          const Color.fromARGB(255, 188, 45, 33),
-                          Icons.directions_walk,
-                          "");
-                    },
                     left: 10,
                     right: 30,
                     color1: const Color.fromARGB(255, 246, 165, 67),
@@ -198,6 +216,16 @@ class _RoutinePageState extends State<RoutinePage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: RoutineContainer(
+                    onTap: () async {
+                      final temp = await addDialogBox(
+                          context,
+                          const Color.fromARGB(255, 45, 179, 125),
+                          Icons.fastfood_rounded,
+                          "cl");
+                      if (temp == null) return;
+                      currentCalorie += temp.toInt();
+                      calcuPercent();
+                    },
                     left: 25,
                     right: 20,
                     color1: const Color.fromARGB(255, 148, 248, 165),
