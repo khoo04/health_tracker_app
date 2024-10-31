@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_tracker_app/core/theme/app_pallete.dart';
 import 'package:health_tracker_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:health_tracker_app/features/home/presentation/widgets/routine_container.dart';
+import 'package:pedometer/pedometer.dart';
 
 class RoutinePage extends StatefulWidget {
   final double goalLiters;
@@ -20,11 +21,13 @@ class RoutinePage extends StatefulWidget {
 }
 
 class _RoutinePageState extends State<RoutinePage> {
-  double currentLiter = 2.2;
-  int currentStep = 500;
-  int currentCalorie = 1500;
+  double currentLiter = 0;
+  int currentStep = 0;
+  int currentCalorie = 0;
 
   double percentLiter = 0, percentStep = 0, percentCalorie = 0;
+
+  late Stream<StepCount> _stepCountStream;
 
   void calcuPercent() {
     setState(() {
@@ -38,6 +41,20 @@ class _RoutinePageState extends State<RoutinePage> {
   void initState() {
     super.initState();
     calcuPercent();
+  }
+
+  void _initPedometer() {
+    _stepCountStream = Pedometer.stepCountStream;
+    _stepCountStream.listen(
+      _onStepCount,
+    );
+  }
+
+  void _onStepCount(StepCount event) {
+    setState(() {
+      currentStep = event.steps;
+      percentStep = ((currentStep / widget.goalSteps) * 100) * 0.01;
+    });
   }
 
   Future<double?> addDialogBox(

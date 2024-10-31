@@ -272,7 +272,9 @@ class _BmiDetailsPageState extends State<BmiDetailsPage> {
     double heightM = heightCm / 100;
     double bmi = weightKg / (heightM * heightM);
 
-    bmiController.text = bmi.toStringAsFixed(2);
+    setState(() {
+      bmiController.text = bmi.toStringAsFixed(2);
+    });
   }
 
   Future<int?> _heightNumberPicker(

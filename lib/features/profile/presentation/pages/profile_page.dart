@@ -94,9 +94,9 @@ class ProfilePage extends StatelessWidget {
                                   width:
                                       MediaQuery.of(context).size.width * 0.6,
                                   lineHeight: 24.0,
-                                  percent: 0.73,
+                                  percent: 0.10,
                                   center: const Text(
-                                    "24",
+                                    "1",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.bold,
@@ -110,7 +110,7 @@ class ProfilePage extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 5),
-                            const Text("220/300 XP"),
+                            const Text("10/100 XP"),
                             const SizedBox(height: 5),
                             Text(
                               state is AppUserLoggedIn

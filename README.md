@@ -30,6 +30,7 @@ DEPENDENCIES:
   font_awesome_flutter: ^10.7.0
   intl: ^0.19.0
   flutter_lints: ^4.0.0
+  pedometer: ^4.0.2
 
   USAGE:
 

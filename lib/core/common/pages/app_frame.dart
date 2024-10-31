@@ -84,7 +84,7 @@ class _AppFrameState extends State<AppFrame> {
                           style: const TextStyle(fontSize: 17),
                         ),
                         const Text(
-                          "Lvl. 24",
+                          "Lvl. 1",
                           style: TextStyle(fontSize: 15),
                         ),
                         LinearPercentIndicator(
@@ -92,7 +92,7 @@ class _AppFrameState extends State<AppFrame> {
                           barRadius: const Radius.circular(12.0),
                           lineHeight: 15,
                           width: 150,
-                          percent: 0.73,
+                          percent: 0.10,
                           progressColor: AppPallete.primaryColor,
                         ),
                         const SizedBox(height: 5),
