@@ -66,6 +66,7 @@ class _RoutinePageState extends State<RoutinePage> {
 
           void addValue(int value) {
             if (userInput.text.isEmpty) userInput.text = "0";
+            
             double temp = double.parse(userInput.text);
             temp += value;
             userInput.text = temp.toStringAsFixed(1);
@@ -190,8 +191,8 @@ class _RoutinePageState extends State<RoutinePage> {
                           const Color.fromARGB(255, 52, 89, 191),
                           Icons.water_drop,
                           "ml");
-                      if (temp == null) return;
-                      temp as double;
+                      if (temp == null || temp < 0) return;
+                      
                       currentLiter += (temp / 1000);
                       calcuPercent();
                     },
@@ -239,7 +240,7 @@ class _RoutinePageState extends State<RoutinePage> {
                           const Color.fromARGB(255, 45, 179, 125),
                           Icons.fastfood_rounded,
                           "cl");
-                      if (temp == null) return;
+                      if (temp == null || temp < 0) return;
                       currentCalorie += temp.toInt();
                       calcuPercent();
                     },
