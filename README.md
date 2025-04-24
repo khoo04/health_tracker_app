@@ -1,4 +1,4 @@
-HEALTHQUEST
+## HEALTHQUEST
 
 HEALTH AND WELLBEING
 
@@ -7,13 +7,17 @@ A mobile app could serve as a personal health assistant, allowing users to easil
 
 we designed HealthQuest to be simple, guiding you step-by-step. Our custom 7-day plans help you build your goals gradually, like adding a little more water each day, until new habits feel natural. Every small step earns you levels and a sense of accomplishment—because success feels best when it’s built over time.
 
-SETUP:
+## Demo Video
+
+https://youtu.be/XhY_cWqyxbM?si=qmfmUbwFPUU15C6p
+
+## SETUP
 
 -cd to the location you want to put the project (cd <location>)
 -git pull <link>
 -open your vscode and run it
 
-DEPENDENCIES:
+## DEPENDENCIES
 
   cupertino_icons: ^1.0.8
   fpdart: ^1.1.0
@@ -32,7 +36,7 @@ DEPENDENCIES:
   flutter_lints: ^4.0.0
   pedometer: ^4.0.2
 
-  USAGE:
+  ## USAGE
 
   -flutter pub get/ flutter run
   -sign up or log in into app if account already exist
